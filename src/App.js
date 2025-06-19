@@ -1,6 +1,8 @@
 import logo from './logo.svg';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import './components/Navbar';
+import Navbar from './components/Navbar';
+
 
 function App() {
 
@@ -9,13 +11,13 @@ function App() {
   const user = {name: "ph", role: "ADMINISTRADOR"};
 
   return (
-    <div className="App">
 
-
-
+    
+    <div className="App"> 
       <header className="App-header">
        <Navbar user={user}/>
       </header>
+
     </div>
   );
 }
