@@ -9,56 +9,46 @@ import GerenciarUsuarios from './pages/GerenciarUsuarios';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 
-function AppContent() {
-  const location = useLocation();
-  const isLogin = location.pathname === "/login";
-  const isAdmin = localStorage.getItem('role') === 'ADMINISTRADOR';
-
-  return (
-    <>
-      {!isLogin && (
-        <div className="App" style={{ display: 'flex' }}>
-          <Sidebar />
-          <div style={{ marginLeft: '200px', width: '100%' }}>
-            <header className="App-header">
-              <Navbar />
-            </header>
-            <main>
-              <Routes>
-                <Route path="/" element={
-                  <ProtectedRoute>
-                    <Chamados />
-                  </ProtectedRoute>
-                } />
-                <Route path="/criar-chamado" element={
-                  <ProtectedRoute>
-                    <CriarChamado />
-                  </ProtectedRoute>
-                } />
-                <Route path="/usuarios/gerenciar" element={
-                  isAdmin ? <GerenciarUsuarios /> : <NotFound />
-                } />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-          </div>
-        </div>
-      )}
-
-      {isLogin && (
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      )}
-    </>
-  );
-}
-
-export default function App() {
+function AppWrapper() {
   return (
     <BrowserRouter>
       <AppContent />
     </BrowserRouter>
   );
 }
+
+function AppContent() {
+  const location = useLocation();
+  const isLogin = location.pathname === "/login";
+  const isAdmin = localStorage.getItem('role') === 'ADMINISTRADOR';
+
+  return (
+    <div className="App" style={{ display: 'flex' }}>
+      {!isLogin && <Sidebar />}
+      <div style={{ marginLeft: !isLogin ? '200px' : '0', width: '100%' }}>
+        {!isLogin && <Navbar />}
+        <main>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Chamados />
+              </ProtectedRoute>
+            } />
+            <Route path="/criar-chamado" element={
+              <ProtectedRoute>
+                <CriarChamado />
+              </ProtectedRoute>
+            } />
+            <Route path="/usuarios/gerenciar" element={
+              isAdmin ? <GerenciarUsuarios /> : <NotFound />
+            } />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+export default AppWrapper;
