@@ -1,54 +1,42 @@
 import { useState } from "react";
-import usuariosMock from "../data/usuarios";
+import { useEffect } from "react";
+import { listarUsuarios } from "../service/Usuario";
 
 import { useNavigate } from 'react-router-dom';
 
 export default function GerenciarUsuarios() {
   const navigate = useNavigate();
+  useEffect(() => {
+    const role = localStorage.getItem('role');
+    if (role !== 'ADMINISTRADOR') {
+      navigate('/');
+      return;
+    }
+
+    async function fetchUsuarios() {
+      try {
+        const lista = await listarUsuarios();
+        setUsuarios(lista);
+      } catch (error) {
+        alert("Erro ao buscar usuários.");
+      }
+    }
+
+    fetchUsuarios();
+  }, []);
+
 
   const irParaCadastro = () => navigate("/cadastro");
 
-  const [usuarios, setUsuarios] = useState(usuariosMock);
+  const [usuarios, setUsuarios] = useState([]);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
 
-  const adicionarUsuario = (e) => {
-    e.preventDefault();
-    const novo = {
-      id: Date.now(),
-      nome,
-      email
-    };
-    setUsuarios([...usuarios, novo]);
-    setNome("");
-    setEmail("");
-  };
-
-  const removerUsuario = (id) => {
-    setUsuarios(usuarios.filter(u => u.id !== id));
-  };
-
-  return (
+      return (
     <div style={{ padding: "20px" }}>
       <h2>Gerenciar Usuários</h2>
       <button onClick={irParaCadastro}>Novo Cadastro</button>
-      <form onSubmit={adicionarUsuario} style={{ marginBottom: "20px" }}>
-        <input
-          placeholder="Nome"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          required
-        />
-        <input
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{ marginLeft: "10px" }}
-        />
-        <button type="submit" style={{ marginLeft: "10px" }}>Adicionar</button>
-      </form>
-      <ul>
+            <ul>
         {usuarios.map(usuario => (
           <li key={usuario.id}>
             {usuario.nome} - {usuario.email}
