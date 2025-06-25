@@ -8,7 +8,7 @@ export async function cadastrarUsuario({ nome, email, senha, cpf }) {
   };
 
   try {
-    const response = await fetch("http://localhost:8080/api/pessoa/{login}", options);
+    const response = await fetch("http://localhost:8080/api/pessoa/inserir", options);
     if (!response.ok) {
       throw new Error(`Erro na requisição: ${response.statusText}`);
     }
