@@ -1,23 +1,29 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Login.css';
+
+import { loginUsuario } from '../service/Login';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (username === 'ph' && senha === '123') {
-      localStorage.setItem('auth', 'true');
-      localStorage.setItem('username', 'ph');
-      localStorage.setItem('role', 'ADMINISTRADOR');
-      navigate('/');
-    } else {
-      alert('Usuário ou senha incorretos!');
+    try {
+      const usuario = await loginUsuario({ email: username, senha });
+      if (usuario && usuario.nome) {
+        localStorage.setItem('auth', 'true');
+        localStorage.setItem('username', usuario.nome);
+        localStorage.setItem('role', usuario.papel || 'USUARIO');
+        navigate('/');
+      } else {
+        alert('Usuário ou senha incorretos!');
+      }
+    } catch (error) {
+      alert('Erro ao tentar fazer login.');
     }
   };
+
 
   return (
     <div className="login-container">
