@@ -1,7 +1,13 @@
 import { useState } from "react";
 import usuariosMock from "../data/usuarios";
 
+import { useNavigate } from 'react-router-dom';
+
 export default function GerenciarUsuarios() {
+  const navigate = useNavigate();
+
+  const irParaCadastro = () => navigate("/cadastro");
+
   const [usuarios, setUsuarios] = useState(usuariosMock);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -25,6 +31,7 @@ export default function GerenciarUsuarios() {
   return (
     <div style={{ padding: "20px" }}>
       <h2>Gerenciar Usuários</h2>
+      <button onClick={irParaCadastro}>Novo Cadastro</button>
       <form onSubmit={adicionarUsuario} style={{ marginBottom: "20px" }}>
         <input
           placeholder="Nome"
