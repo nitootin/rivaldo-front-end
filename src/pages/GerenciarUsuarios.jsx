@@ -1,11 +1,15 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { listarUsuarios, atualizarUsuario } from "../service/Usuario";
-
 import { useNavigate } from 'react-router-dom';
 
 export default function GerenciarUsuarios() {
   const navigate = useNavigate();
+
+  const [usuarios, setUsuarios] = useState([]);
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [usuarioEditando, setUsuarioEditando] = useState(null);
+
   useEffect(() => {
     const role = localStorage.getItem('role');
     if (role !== 'ADMINISTRADOR') {
@@ -25,20 +29,33 @@ export default function GerenciarUsuarios() {
     fetchUsuarios();
   }, []);
 
-
   const irParaCadastro = () => navigate("/cadastro");
 
-  const [usuarios, setUsuarios] = useState([]);
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [usuarioEditando, setUsuarioEditando] = useState(null);
+  const handleAtualizar = async (e) => {
+    e.preventDefault();
+    try {
+      const atualizado = {
+        ...usuarioEditando,
+        email,
+        senha
+      };
+      await atualizarUsuario(atualizado);
+      alert("Usuário atualizado com sucesso!");
+      setUsuarioEditando(null);
+      setEmail("");
+      setSenha("");
+      const lista = await listarUsuarios();
+      setUsuarios(lista);
+    } catch (error) {
+      alert("Erro ao atualizar usuário.");
+    }
+  };
 
-      return (
+  return (
     <div style={{ padding: "20px" }}>
       <h2>Gerenciar Usuários</h2>
       <button onClick={irParaCadastro}>Novo Cadastro</button>
-            <ul>
+      <ul style={{ display: "flex", flexDirection: "column", alignItems: "center", listStyle: "none", padding: 0 }}>
         {usuarios.map(usuario => (
           <li key={usuario.id_Pessoa}>
             {usuario.nome} - {usuario.email}
@@ -71,41 +88,7 @@ export default function GerenciarUsuarios() {
             <button type="button" onClick={() => setUsuarioEditando(null)}>Cancelar</button>
           </form>
         )}
-
-        {/* Lista de usuários */}
-        {usuarios.map(usuario => (
-          <li key={usuario.id}>
-            {usuario.nome} - {usuario.email}
-            <button
-              onClick={() => removerUsuario(usuario.id)}
-              style={{ marginLeft: "10px", color: "white", background: "red", border: "none" }}
-            >
-              Remover
-            </button>
-          </li>
-        ))}
       </ul>
     </div>
   );
 }
-
-  const handleAtualizar = async (e) => {
-    e.preventDefault();
-    try {
-      const atualizado = {
-        ...usuarioEditando,
-        email,
-        senha
-      };
-      await atualizarUsuario(atualizado);
-      alert("Usuário atualizado com sucesso!");
-      setUsuarioEditando(null);
-      setEmail("");
-      setSenha("");
-      // Atualiza a lista
-      const lista = await listarUsuarios();
-      setUsuarios(lista);
-    } catch (error) {
-      alert("Erro ao atualizar usuário.");
-    }
-  };
