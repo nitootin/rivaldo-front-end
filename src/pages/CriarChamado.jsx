@@ -19,7 +19,7 @@ export default function CriarChamado() {
     const novoChamado = {
       descricao,
       categoria,
-      solicitante: { id: user.id } // aqui o backend reconhece
+      solicitante: { id: user.id }
     };
 
     try {

@@ -8,33 +8,28 @@ export default function Login() {
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
 
-  
- const handleLogin = async (e) => {
-  e.preventDefault();
-  try {
-    const usuario = await loginUsuario({ email: username, senha });
-    console.log('Resposta completa:', usuario);
-    
-    if (usuario && (usuario.nome || usuario.id)) {
-      localStorage.setItem('auth', 'true');
-      localStorage.setItem('username', usuario.nome);
-      localStorage.setItem('role', usuario.perfil || 'USUARIO');
-      localStorage.setItem('user', JSON.stringify(usuario)); // <-- ESSA LINHA É ESSENCIAL
-      navigate('/');
-    } else {
-      alert('Usuário ou senha incorretos!');
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const usuario = await loginUsuario({ email: username, senha });
+      console.log('Resposta completa:', usuario);
+      if (usuario && (usuario.nome || usuario.id)) {
+        localStorage.setItem('auth', 'true');
+        localStorage.setItem('user', JSON.stringify(usuario));
+        localStorage.setItem('role', usuario.perfil || 'USUARIO');
+        navigate('/');
+      } else {
+        alert('Usuário ou senha incorretos!');
+      }
+    } catch (error) {
+      console.error('Erro detalhado:', error);
+      if (error.message === 'Erro de autenticação') {
+        alert('Credenciais inválidas!');
+      } else {
+        alert('Erro de conexão com servidor.');
+      }
     }
-  } catch (error) {
-    console.error('Erro detalhado:', error);
-    if (error.message === 'Erro de autenticação') {
-      alert('Credenciais inválidas!');
-    } else {
-      alert('Erro de conexão com servidor.');
-    }
-  }
-};
-
-
+  };
 
   return (
     <div className="login-container">
