@@ -19,7 +19,7 @@ export default function CriarChamado() {
     const novoChamado = {
       descricao,
       categoria,
-      solicitante: { id: user.id }
+      solicitante: user 
     };
 
     try {
@@ -58,7 +58,7 @@ export default function CriarChamado() {
             <option value="APLICATIVO">APLICATIVO</option>
             <option value="PERIFERICO">PERIFERICO</option>
             <option value="HARDWARE">HARDWARE</option>
-            <option value="INTERNE">INTERNE</option>
+            <option value="INTERNET">INTERNET</option>
           </select>
         </div>
 

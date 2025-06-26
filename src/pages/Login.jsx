@@ -13,9 +13,10 @@ export default function Login() {
     try {
       const usuario = await loginUsuario({ email: username, senha });
       console.log('Resposta completa:', usuario);
+
       if (usuario && (usuario.nome || usuario.id)) {
         localStorage.setItem('auth', 'true');
-        localStorage.setItem('user', JSON.stringify(usuario));
+        localStorage.setItem('user', JSON.stringify(usuario)); 
         localStorage.setItem('role', usuario.perfil || 'USUARIO');
         navigate('/');
       } else {
