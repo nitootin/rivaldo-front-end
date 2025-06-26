@@ -34,7 +34,7 @@ function AppContent() {
   }, [isAuth, location.pathname, navigate]);
 
   if (!authChecked) {
-    return null; 
+    return null;
   }
 
   return (
@@ -50,7 +50,7 @@ function AppContent() {
                 ? <ProtectedRoute><Chamados /></ProtectedRoute>
                 : <Navigate to="/login" replace />
             } />
-            <Route path="/criar-chamado" element={
+            <Route path="/chamados/criar" element={
               isAuth
                 ? <ProtectedRoute><CriarChamado /></ProtectedRoute>
                 : <Navigate to="/login" replace />

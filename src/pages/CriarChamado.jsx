@@ -5,17 +5,29 @@ import { criarChamado } from '../service/Chamado';
 export default function CriarChamado() {
   const [descricao, setDescricao] = useState('');
   const [categoria, setCategoria] = useState('APLICATIVO');
-  const solicitante = localStorage.getItem('username');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (!user || !user.id) {
+      alert("Usuário não autenticado.");
+      return;
+    }
+
+    const novoChamado = {
+      descricao,
+      categoria,
+      solicitante: { id: user.id } // aqui o backend reconhece
+    };
 
     try {
-      await criarChamado({ descricao, categoria });
+      await criarChamado(novoChamado);
       alert("Chamado criado com sucesso!");
       navigate('/');
     } catch (error) {
+      console.error("Erro ao criar chamado:", error);
       alert("Erro ao criar chamado.");
     }
   };
