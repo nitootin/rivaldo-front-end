@@ -13,7 +13,8 @@ export default function Login() {
     e.preventDefault();
     try {
       const usuario = await loginUsuario({ email: username, senha });
-      if (usuario && usuario.nome) {
+      console.log('Resposta completa:', usuario);
+      if (usuario && (usuario.nome || usuario.id)) {
         localStorage.setItem('auth', 'true');
         localStorage.setItem('username', usuario.nome);
         localStorage.setItem('role', usuario.papel || 'USUARIO');
@@ -22,8 +23,13 @@ export default function Login() {
         alert('Usuário ou senha incorretos!');
       }
     } catch (error) {
-      alert('Erro ao tentar fazer login.');
-    }
+  console.error('Erro detalhado:', error);
+  if (error.message === 'Erro de autenticação') {
+    alert('Credenciais inválidas!');
+  } else {
+    alert('Erro de conexão com servidor.');
+  }
+}
   };
 
 
