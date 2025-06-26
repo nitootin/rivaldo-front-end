@@ -1,5 +1,4 @@
 import './App.css';
-import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import { BrowserRouter, Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import NotFound from './components/NotFound';
@@ -34,14 +33,13 @@ function AppContent() {
   }, [isAuth, location.pathname, navigate]);
 
   if (!authChecked) {
-    return null; 
+    return null;
   }
 
   return (
     <div className="App" style={{ display: 'flex' }}>
       {!isLogin && isAuth && <Sidebar />}
       <div style={{ marginLeft: !isLogin && isAuth ? '200px' : '0', width: '100%' }}>
-        {!isLogin && isAuth && <Navbar />}
         <main>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -50,7 +48,7 @@ function AppContent() {
                 ? <ProtectedRoute><Chamados /></ProtectedRoute>
                 : <Navigate to="/login" replace />
             } />
-            <Route path="/criar-chamado" element={
+            <Route path="/chamados/criar" element={
               isAuth
                 ? <ProtectedRoute><CriarChamado /></ProtectedRoute>
                 : <Navigate to="/login" replace />
