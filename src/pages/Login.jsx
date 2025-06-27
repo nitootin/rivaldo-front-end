@@ -38,7 +38,7 @@ export default function Login() {
         <h2>Login</h2>
         <input
           type="text"
-          placeholder="Usuário"
+          placeholder="E-mail"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
