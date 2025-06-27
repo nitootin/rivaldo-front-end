@@ -1,15 +1,20 @@
-
 export async function cadastrarUsuario({ nome, email, senha, cpf }) {
   const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ nome, email, senha, cpf })
+    body: JSON.stringify({
+      nome,
+      email,
+      senha,
+      cpf,
+      perfil: "USUARIO" 
+    })
   };
 
   try {
-    const response = await fetch("http://localhost:8080/api/pessoa/{login}", options);
+    const response = await fetch("http://localhost:8080/api/pessoa", options);
     if (!response.ok) {
       throw new Error(`Erro na requisição: ${response.statusText}`);
     }

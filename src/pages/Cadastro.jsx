@@ -1,51 +1,98 @@
-
 import React, { useState } from 'react';
+import './Cadastro.css';
 import { useNavigate } from 'react-router-dom';
-
 import { cadastrarUsuario } from '../service/Cadastro';
 
 export default function Cadastro() {
-  const navigate = useNavigate();
-
-  const [form, setForm] = useState({
+  const [formData, setFormData] = useState({
     nome: '',
     email: '',
     senha: '',
-    cpf: ''
+    cpf: '',
+    perfil: 'USUARIO',
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const pessoa = await cadastrarUsuario(form);
-
-      if (pessoa.id_Pessoa > 0) {
-        alert('Cadastro realizado com sucesso.');
-        navigate('/login');
-      } else {
-        alert('Login ou email já cadastrados no sistema');
-      }
-
+      await cadastrarUsuario(formData);
+      alert('Usuário cadastrado com sucesso!');
+      navigate('/usuarios/gerenciar');
     } catch (error) {
-      console.error('Erro na requisição:', error);
-      alert('Ocorreu um erro ao processar a requisição');
+      alert('Erro ao cadastrar usuário. Verifique os dados e tente novamente.');
+      console.error(error);
     }
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Cadastro de Usuário</h2>
+    <div className="cadastro-container">
+      <h2>Cadastrar Novo Usuário</h2>
       <form onSubmit={handleSubmit}>
-        <input className="input-nome" name="nome" placeholder="Nome" value={form.nome} onChange={handleChange} required />
-        <input className="input-email" name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-        <input className="input-senha" name="senha" type="password" placeholder="Senha" value={form.senha} onChange={handleChange} required />
-        <input className="input-cpf" name="cpf" placeholder="CPF" value={form.cpf} onChange={handleChange} required />
-        <button type="submit">Cadastrar</button>
+        <div className="form-group">
+          <label>Nome:</label>
+          <input
+            type="text"
+            name="nome"
+            value={formData.nome}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Senha:</label>
+          <input
+            type="password"
+            name="senha"
+            value={formData.senha}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>CPF:</label>
+          <input
+            type="text"
+            name="cpf"
+            value={formData.cpf}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Perfil:</label>
+          <select
+            name="perfil"
+            value={formData.perfil}
+            onChange={handleChange}
+            required
+          >
+            <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+            <option value="USUARIO">USUÁRIO</option>
+          </select>
+        </div>
+
+        <button type="submit" className="btn-cadastrar">Cadastrar</button>
       </form>
     </div>
   );
