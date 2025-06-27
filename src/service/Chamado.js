@@ -19,9 +19,21 @@ export async function criarChamado(chamado) {
   return await response.json();
 }
 
+
 export async function concluirChamado(id) {
-  const response = await fetch(`${API_URL}/concluir/${id}`, {
-    method: "PUT"
+  const chamado = { id }; 
+
+  const response = await fetch('http://localhost:8080/api/chamado/atualizar/status', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(chamado)
   });
-  if (!response.ok) throw new Error("Erro ao concluir chamado");
+
+  if (!response.ok) {
+    throw new Error(`Erro ao concluir chamado: ${response.statusText}`);
+  }
+
+  return await response.json();
 }

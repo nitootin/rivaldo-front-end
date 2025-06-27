@@ -5,7 +5,7 @@ import NotFound from './components/NotFound';
 import Chamados from './pages/Chamados';
 import CriarChamado from './pages/CriarChamado';
 import GerenciarUsuarios from './pages/GerenciarUsuarios';
-import Cadastro from './pages/Cadastro'; // 🚀 Novo import
+import Cadastro from './pages/Cadastro'; 
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useEffect, useState } from 'react';

@@ -23,7 +23,7 @@ export default function Chamados() {
   const handleConcluir = async (id) => {
     try {
       await concluirChamado(id);
-      setChamados(prev => prev.filter(c => c.id !== id));
+      window.location.reload(); 
     } catch (error) {
       console.error('Erro ao concluir chamado:', error);
     }
