@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { listarChamados, concluirChamado } from '../service/Chamado';
 import { Link } from 'react-router-dom';
+import './Chamados.css';
 
 export default function Chamados() {
   const [chamados, setChamados] = useState([]);
@@ -29,63 +30,27 @@ export default function Chamados() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: '20px'
-      }}>
+    <div className="chamados-container">
+      <div className="chamados-header">
         <h2>Lista de Chamados</h2>
         <Link to="/chamados/criar">
-          <button style={{
-            backgroundColor: '#2563eb',
-            color: '#fff',
-            padding: '10px 16px',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer'
-          }}>
-            Criar Chamado
-          </button>
+          <button className="btn-criar-chamado">Criar Chamado</button>
         </Link>
       </div>
 
       {chamados.map((chamado) => (
-        <div
-          key={chamado.id}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            backgroundColor: '#f8f9fa',
-            border: '1px solid #ddd',
-            borderRadius: '8px',
-            padding: '10px 20px',
-            margin: '10px 0'
-          }}
-        >
-          <div style={{ flex: 1 }}>
+        <div key={chamado.id} className="chamado-card">
+          <div className="chamado-info">
             <p><strong>Descrição:</strong> {chamado.descricao}</p>
           </div>
-          <div style={{ flex: 1 }}>
+          <div className="chamado-info">
             <p><strong>Categoria:</strong> {chamado.categoria}</p>
           </div>
-          <div style={{ flex: 1 }}>
+          <div className="chamado-info">
             <p><strong>Solicitante:</strong> {chamado.solicitante?.nome || chamado.solicitante || "Desconhecido"}</p>
           </div>
           {role === 'ADMINISTRADOR' && (
-            <button
-              onClick={() => handleConcluir(chamado.id)}
-              style={{
-                backgroundColor: 'green',
-                color: '#fff',
-                border: 'none',
-                padding: '8px 16px',
-                borderRadius: '4px',
-                cursor: 'pointer'
-              }}
-            >
+            <button className="btn-concluir" onClick={() => handleConcluir(chamado.id)}>
               Concluir
             </button>
           )}
