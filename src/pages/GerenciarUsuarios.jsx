@@ -35,7 +35,10 @@ export default function GerenciarUsuarios() {
             <p><strong>Email:</strong> {user.email}</p>
             <p><strong>Perfil:</strong> {user.perfil}</p>
           </div>
-          <button className="btn-editar" onClick={() => alert(`Editar usuário ${user.nome}`)}>
+          <button
+            className="btn-editar"
+            onClick={() => navigate(`/usuarios/editar/${user.id}`)}
+          >
             Editar
           </button>
         </div>

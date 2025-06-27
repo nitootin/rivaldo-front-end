@@ -8,6 +8,7 @@ import GerenciarUsuarios from './pages/GerenciarUsuarios';
 import Cadastro from './pages/Cadastro'; 
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
+import EditarUsuario from './pages/EditarUsuario'; // IMPORTAÇÃO ADICIONADA
 import { useEffect, useState } from 'react';
 
 function AppWrapper() {
@@ -33,9 +34,7 @@ function AppContent() {
     setAuthChecked(true);
   }, [isAuth, location.pathname, navigate]);
 
-  if (!authChecked) {
-    return null;
-  }
+  if (!authChecked) return null;
 
   return (
     <div className="App" style={{ display: 'flex' }}>
@@ -62,6 +61,11 @@ function AppContent() {
             <Route path="/usuarios/cadastrar" element={
               isAuth && isAdmin
                 ? <Cadastro />
+                : <Navigate to="/login" replace />
+            } />
+            <Route path="/usuarios/editar/:id" element={ // ROTA ADICIONADA
+              isAuth && isAdmin
+                ? <EditarUsuario />
                 : <Navigate to="/login" replace />
             } />
             <Route path="*" element={<NotFound />} />
