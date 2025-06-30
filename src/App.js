@@ -2,13 +2,13 @@ import './App.css';
 import Sidebar from './components/Sidebar';
 import { BrowserRouter, Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import NotFound from './components/NotFound';
-import Chamados from './pages/Chamados';
-import CriarChamado from './pages/CriarChamado';
-import GerenciarUsuarios from './pages/GerenciarUsuarios';
-import Cadastro from './pages/Cadastro'; 
-import Login from './pages/Login';
+import Chamados from './pages/Chamados/Chamados';
+import CriarChamado from './pages/CriarChamado/CriarChamado';
+import GerenciarUsuarios from './pages/GerenciarUsuarios/GerenciarUsuarios';
+import Cadastro from './pages/Cadastro/Cadastro'; 
+import Login from './pages/Login/Login';
 import ProtectedRoute from './components/ProtectedRoute';
-import EditarUsuario from './pages/EditarUsuario'; // IMPORTAÇÃO ADICIONADA
+import EditarUsuario from './pages/EditarUsuario/EditarUsuario'; 
 import { useEffect, useState } from 'react';
 
 function AppWrapper() {

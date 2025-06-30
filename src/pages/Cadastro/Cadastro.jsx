@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Cadastro.css';
 import { useNavigate } from 'react-router-dom';
-import { cadastrarUsuario } from '../service/Cadastro';
+import { cadastrarUsuario } from '../../service/Cadastro';
 
 export default function Cadastro() {
   const [formData, setFormData] = useState({

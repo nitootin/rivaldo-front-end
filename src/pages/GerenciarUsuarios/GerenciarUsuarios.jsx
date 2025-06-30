@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './GerenciarUsuarios.css';
-import { listarUsuarios } from '../service/Usuario';
+import { listarUsuarios } from '../../service/Usuario';
 import { useNavigate } from 'react-router-dom';
 
 export default function GerenciarUsuarios() {

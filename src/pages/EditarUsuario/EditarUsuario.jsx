@@ -4,7 +4,7 @@ import {
   listarUsuarios,
   atualizarUsuario,
   atualizarStatusUsuario
-} from '../service/Usuario';
+} from '../../service/Usuario';
 import './EditarUsuario.css';
 
 export default function EditarUsuario() {

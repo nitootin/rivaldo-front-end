@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { listarChamados, concluirChamado } from '../service/Chamado';
+import { listarChamados, concluirChamado } from '../../service/Chamado';
 import { Link } from 'react-router-dom';
 import './Chamados.css';
 
