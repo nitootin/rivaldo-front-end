@@ -84,10 +84,9 @@ export default function Cadastro() {
           <select
             name="perfil"
             value={formData.perfil}
-            onChange={handleChange}
-            required
+            disabled
+            style={{ backgroundColor: '#e5e7eb', cursor: 'not-allowed' }}
           >
-            <option value="ADMINISTRADOR">ADMINISTRADOR</option>
             <option value="USUARIO">USUÁRIO</option>
           </select>
         </div>

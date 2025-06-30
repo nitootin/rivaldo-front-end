@@ -43,7 +43,7 @@ export default function CriarChamado() {
             value={descricao}
             onChange={(e) => setDescricao(e.target.value)}
             required
-            style={{ width: '100%', padding: '8px' }}
+            style={{ width: '95%', padding: '8px' }}
           />
         </div>
 
