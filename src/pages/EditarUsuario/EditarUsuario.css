@@ -69,7 +69,7 @@
 }
 
 .btn-status:active {
-  filter: brightness(0.9); /* apenas efeito de clique */
+  filter: brightness(0.9); 
 }
 
 

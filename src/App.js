@@ -63,7 +63,7 @@ function AppContent() {
                 ? <Cadastro />
                 : <Navigate to="/login" replace />
             } />
-            <Route path="/usuarios/editar/:id" element={ // ROTA ADICIONADA
+            <Route path="/usuarios/editar/:id" element={ 
               isAuth && isAdmin
                 ? <EditarUsuario />
                 : <Navigate to="/login" replace />
