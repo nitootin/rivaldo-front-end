@@ -1,6 +1,6 @@
 .chamado-card {
   display: flex;
-  justify-content: space-between;  /* infos na esquerda, botão na direita */
+  justify-content: space-between;  
   align-items: flex-start;
   background-color: #f8f9fa;
   border: 1px solid #ddd;
@@ -12,13 +12,13 @@
 
 .chamado-info p {
   margin: 4px 0;
-  text-align: left;               /* garante alinhamento à esquerda */
-  white-space: normal;            /* permite que valores quebrem em telas pequenas */
+  text-align: left;              
+  white-space: normal;            
 }
 
 .chamado-info strong {
   display: inline-block;
-  min-width: 100px;               /* rótulo fixo para alinhar valores */
+  min-width: 100px;               
 }
 
 .btn-concluir {
@@ -28,6 +28,6 @@
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: 20px;              /* espaçamento entre infos e botão */
-  height: fit-content;            /* botão alinha topo do card */
+  margin-left: 20px;             
+  height: fit-content;          
 }
