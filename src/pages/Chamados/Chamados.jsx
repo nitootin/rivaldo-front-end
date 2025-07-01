@@ -38,7 +38,7 @@ export default function Chamados() {
         </Link>
       </div>
 
-     {chamados.map((chamado) => (
+   {chamados.map((chamado) => (
   <div key={chamado.id} className="chamado-card">
     <div className="chamado-info">
       <p className="info-line">

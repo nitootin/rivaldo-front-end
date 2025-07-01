@@ -1,52 +1,24 @@
-.chamados-container {
-  padding: 20px;
-}
-
-.chamados-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.btn-criar-chamado {
-  background-color: #2563eb;
-  color: white;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 .chamado-card {
   display: flex;
-  justify-content: flex-start;  
-  align-items: flex-start;       
+  justify-content: space-between;  /* infos na esquerda, botão na direita */
+  align-items: flex-start;
   background-color: #f8f9fa;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px 20px;
   margin: 10px 0;
-  width: 100%;
+  width: 97%;
 }
 
-.chamado-info {
-  flex: 1;
-}
-
-.info-line {
-  display: flex;
-  align-items: center;
+.chamado-info p {
   margin: 4px 0;
+  text-align: left;               /* garante alinhamento à esquerda */
+  white-space: normal;            /* permite que valores quebrem em telas pequenas */
 }
 
-.info-label {
-  width: 100px;   
-  font-weight: bold;
-}
-
-.info-value {
-  flex: 1;
+.chamado-info strong {
+  display: inline-block;
+  min-width: 100px;               /* rótulo fixo para alinhar valores */
 }
 
 .btn-concluir {
@@ -56,5 +28,6 @@
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: auto;   
+  margin-left: 20px;              /* espaçamento entre infos e botão */
+  height: fit-content;            /* botão alinha topo do card */
 }
