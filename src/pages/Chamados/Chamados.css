@@ -20,16 +20,32 @@
 
 .chamado-card {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;  
+  align-items: flex-start;       
   background-color: #f8f9fa;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px 20px;
   margin: 10px 0;
+  width: 100%;
 }
 
 .chamado-info {
+  flex: 1;
+}
+
+.info-line {
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
+}
+
+.info-label {
+  width: 100px;   
+  font-weight: bold;
+}
+
+.info-value {
   flex: 1;
 }
 
@@ -40,4 +56,5 @@
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+  margin-left: auto;   
 }

@@ -38,24 +38,29 @@ export default function Chamados() {
         </Link>
       </div>
 
-      {chamados.map((chamado) => (
-        <div key={chamado.id} className="chamado-card">
-          <div className="chamado-info">
-            <p><strong>Descrição:</strong> {chamado.descricao}</p>
-          </div>
-          <div className="chamado-info">
-            <p><strong>Categoria:</strong> {chamado.categoria}</p>
-          </div>
-          <div className="chamado-info">
-            <p><strong>Solicitante:</strong> {chamado.solicitante?.nome || chamado.solicitante || "Desconhecido"}</p>
-          </div>
-          {role === 'ADMINISTRADOR' && (
-            <button className="btn-concluir" onClick={() => handleConcluir(chamado.id)}>
-              Concluir
-            </button>
-          )}
-        </div>
-      ))}
+     {chamados.map((chamado) => (
+  <div key={chamado.id} className="chamado-card">
+    <div className="chamado-info">
+      <p className="info-line">
+        <span className="info-label">Descrição:</span>
+        <span className="info-value">{chamado.descricao}</span>
+      </p>
+      <p className="info-line">
+        <span className="info-label">Categoria:</span>
+        <span className="info-value">{chamado.categoria}</span>
+      </p>
+      <p className="info-line">
+        <span className="info-label">Solicitante:</span>
+        <span className="info-value">{chamado.solicitante?.nome || chamado.solicitante || "Desconhecido"}</span>
+      </p>
+    </div>
+    {role === 'ADMINISTRADOR' && (
+      <button className="btn-concluir" onClick={() => handleConcluir(chamado.id)}>
+        Concluir
+      </button>
+    )}
+  </div>
+))}
     </div>
   );
 }

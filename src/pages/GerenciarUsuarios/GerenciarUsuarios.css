@@ -19,9 +19,9 @@
 }
 
 .usuario-card {
-    display: flex;                /* infos + botão lado a lado */
-    justify-content: flex-start;  /* alinha tudo à esquerda */
-    align-items: center;          /* alinha verticalmente */
+    display: flex;               
+    justify-content: flex-start;  
+    align-items: center;         
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -29,10 +29,10 @@
     margin: 10px 0;
 }
 .usuario-info {
-    flex: 0 1 auto;               /* infos só ocupam o espaço necessário */
+    flex: 0 1 auto;               
 }
 
-/* Corrige alinhamento rótulo-valor */
+
 .info-line {
     display: flex;
     align-items: center;
@@ -40,7 +40,7 @@
 }
 
 .info-label {
-    width: 90px;                  /* largura fixa dos rótulos */
+    width: 90px;                 
     font-weight: bold;
 }
 
@@ -56,5 +56,5 @@
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: auto;            /* faz o botão ir para o lado direito */
+    margin-left: auto;         
 }
