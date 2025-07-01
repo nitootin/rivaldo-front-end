@@ -9,7 +9,7 @@
     margin-bottom: 20px;
 }
 
-.btn-novo-usuario {
+.btn-novo {
     background-color: #2563eb;
     color: white;
     padding: 10px 16px;
@@ -19,20 +19,36 @@
 }
 
 .usuario-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex;                /* infos + botão lado a lado */
+    justify-content: flex-start;  /* alinha tudo à esquerda */
+    align-items: center;          /* alinha verticalmente */
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px 20px;
     margin: 10px 0;
 }
-
 .usuario-info {
+    flex: 0 1 auto;               /* infos só ocupam o espaço necessário */
+}
+
+/* Corrige alinhamento rótulo-valor */
+.info-line {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+}
+
+.info-label {
+    width: 90px;                  /* largura fixa dos rótulos */
+    font-weight: bold;
+}
+
+.info-value {
     flex: 1;
 }
 
+/* Botão editar */
 .btn-editar {
     background-color: green;
     color: white;
@@ -40,6 +56,5 @@
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
-    background-color: green !important;
-    color: white !important;
+    margin-left: auto;            /* faz o botão ir para o lado direito */
 }

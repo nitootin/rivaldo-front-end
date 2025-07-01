@@ -30,10 +30,19 @@ export default function GerenciarUsuarios() {
 
       {usuarios.map((user) => (
         <div key={user.id} className="usuario-card">
-          <div>
-            <p><strong>Nome:</strong> {user.nome}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Perfil:</strong> {user.perfil}</p>
+          <div className="usuario-info">
+            <p className="info-line">
+              <span className="info-label">Nome:</span>
+              <span className="info-value">{user.nome}</span>
+            </p>
+            <p className="info-line">
+              <span className="info-label">Email:</span>
+              <span className="info-value">{user.email}</span>
+            </p>
+            <p className="info-line">
+              <span className="info-label">Perfil:</span>
+              <span className="info-value">{user.perfil}</span>
+            </p>
           </div>
           <button
             className="btn-editar"
