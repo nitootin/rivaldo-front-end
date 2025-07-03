@@ -64,10 +64,19 @@
   cursor: pointer;
 }
 
+.btn-status:hover {
+  background-color: inherit;
+}
+
+.btn-status:active {
+  filter: brightness(0.9); 
+}
+
+
 .btn-status.desativar {
   background-color: #dc3545;
 }
 
 .btn-status.ativar {
-  background-color: #6c757d;
+  background-color: #dc3545;
 }

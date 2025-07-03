@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { criarChamado } from '../service/Chamado';
+import { criarChamado } from '../../service/Chamado';
 
 export default function CriarChamado() {
   const [descricao, setDescricao] = useState('');
@@ -43,7 +43,7 @@ export default function CriarChamado() {
             value={descricao}
             onChange={(e) => setDescricao(e.target.value)}
             required
-            style={{ width: '100%', padding: '8px' }}
+            style={{ width: '95%', padding: '12px', borderRadius: '9px' }}
           />
         </div>
 
@@ -53,7 +53,7 @@ export default function CriarChamado() {
             value={categoria}
             onChange={(e) => setCategoria(e.target.value)}
             required
-            style={{ width: '100%', padding: '8px' }}
+            style={{ width: '100%', padding: '12px', borderRadius: '9px' }}
           >
             <option value="APLICATIVO">APLICATIVO</option>
             <option value="PERIFERICO">PERIFERICO</option>

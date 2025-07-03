@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Cadastro.css';
 import { useNavigate } from 'react-router-dom';
-import { cadastrarUsuario } from '../service/Cadastro';
+import { cadastrarUsuario } from '../../service/Cadastro';
 
 export default function Cadastro() {
   const [formData, setFormData] = useState({
@@ -84,10 +84,9 @@ export default function Cadastro() {
           <select
             name="perfil"
             value={formData.perfil}
-            onChange={handleChange}
-            required
+            disabled
+            style={{ backgroundColor: '#e5e7eb', cursor: 'not-allowed' }}
           >
-            <option value="ADMINISTRADOR">ADMINISTRADOR</option>
             <option value="USUARIO">USUÁRIO</option>
           </select>
         </div>

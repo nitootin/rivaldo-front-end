@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginUsuario } from '../service/Login';
+import { loginUsuario } from '../../service/Login';
 import './Login.css';
 
 export default function Login() {
@@ -38,7 +38,7 @@ export default function Login() {
         <h2>Login</h2>
         <input
           type="text"
-          placeholder="Usuário"
+          placeholder="E-mail"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
