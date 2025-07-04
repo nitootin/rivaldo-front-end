@@ -22,6 +22,15 @@
   min-width: 100px;              
 }
 
+.info-line {
+  margin: 4px 0;
+}
+
+.info-label {
+  display: inline-block;
+  min-width: 80px;    
+  font-weight: bold;
+}
 
 .botao-container-vertical {
   display: flex;

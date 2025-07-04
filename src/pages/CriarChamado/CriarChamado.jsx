@@ -13,7 +13,7 @@ export default function CriarChamado() {
     const user = JSON.parse(localStorage.getItem('user'));
 
     if (!user || !user.id) {
-      alert("Usuário não autenticado.");
+      toast.error("Usuário não autenticado!");
       return;
     }
 
