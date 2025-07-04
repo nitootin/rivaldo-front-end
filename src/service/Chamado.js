@@ -1,8 +1,9 @@
 
 const API_URL = "http://localhost:8080/api/chamado";
 
-export async function listarChamados() {
-  const response = await fetch(API_URL);
+export async function listarChamados(email) {
+  const url = `${API_URL}/${encodeURIComponent(email)}`;
+  const response = await fetch(url);
   if (!response.ok) throw new Error("Erro ao listar chamados");
   return await response.json();
 }
