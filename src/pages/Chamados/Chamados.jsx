@@ -10,17 +10,23 @@ export default function Chamados() {
   const [chamados, setChamados] = useState([]);
   const role = localStorage.getItem('role');
 
-  useEffect(() => {
-    async function fetchChamados() {
-      try {
-        const data = await listarChamados();
-        setChamados(data);
-      } catch (error) {
-        console.error('Erro ao buscar chamados:', error);
+useEffect(() => {
+  async function fetchChamados() {
+    try {
+      const email = localStorage.getItem("email");
+      if (!email) {
+        console.error("Email do usuário não encontrado no localStorage!");
+        return;
       }
+      const data = await listarChamados(email); 
+      setChamados(data);
+    } catch (error) {
+      console.error("Erro ao buscar chamados:", error);
     }
-    fetchChamados();
-  }, []);
+  }
+  fetchChamados();
+}, []);
+
 
   const onAcaoClick = async (chamadoId) => {
     try {

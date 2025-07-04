@@ -16,8 +16,9 @@ export default function Login() {
 
       if (usuario && (usuario.nome || usuario.id)) {
         localStorage.setItem('auth', 'true');
-        localStorage.setItem('user', JSON.stringify(usuario)); 
+        localStorage.setItem('user', JSON.stringify(usuario));
         localStorage.setItem('role', usuario.perfil || 'USUARIO');
+        localStorage.setItem("email", username); 
         navigate('/');
       } else {
         alert('Usuário ou senha incorretos!');
