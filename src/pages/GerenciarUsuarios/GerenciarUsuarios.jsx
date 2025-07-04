@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './GerenciarUsuarios.css';
-import { listarUsuarios } from '../../service/Usuario';
+import { listarUsuarios, atualizarStatusUsuario } from '../../service/Usuario';
 import { useNavigate } from 'react-router-dom';
+import BotaoStatusUsuario from '../../components/BotaoStatusUsuario';
 
 export default function GerenciarUsuarios() {
   const [usuarios, setUsuarios] = useState([]);
@@ -18,6 +19,15 @@ export default function GerenciarUsuarios() {
     }
     fetchUsuarios();
   }, []);
+
+  const handleStatusClick = async (userId) => {
+    try {
+      await atualizarStatusUsuario({ id: userId });
+      window.location.reload();
+    } catch (error) {
+      console.error('Erro ao atualizar status do usuário:', error);
+    }
+  };
 
   return (
     <div className="usuarios-container">
@@ -44,12 +54,17 @@ export default function GerenciarUsuarios() {
               <span className="info-value">{user.perfil}</span>
             </p>
           </div>
-          <button
-            className="btn-editar"
-            onClick={() => navigate(`/usuarios/editar/${user.id}`)}
-          >
-            Editar
-          </button>
+
+          <div className="usuario-actions">
+            <button
+              className="btn-editar"
+              onClick={() => navigate(`/usuarios/editar/${user.id}`)}
+            >
+              Editar
+            </button>
+
+            <BotaoStatusUsuario usuario={user} onStatusClick={handleStatusClick} />
+          </div>
         </div>
       ))}
     </div>

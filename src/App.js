@@ -10,6 +10,8 @@ import Login from './pages/Login/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import EditarUsuario from './pages/EditarUsuario/EditarUsuario'; 
 import { useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';   
 
 function AppWrapper() {
   return (
@@ -41,35 +43,38 @@ function AppContent() {
       {!isLogin && isAuth && <Sidebar />}
       <div style={{ marginLeft: !isLogin && isAuth ? '200px' : '0', width: '100%' }}>
         <main>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={
-              isAuth
-                ? <ProtectedRoute><Chamados /></ProtectedRoute>
-                : <Navigate to="/login" replace />
-            } />
-            <Route path="/chamados/criar" element={
-              isAuth
-                ? <ProtectedRoute><CriarChamado /></ProtectedRoute>
-                : <Navigate to="/login" replace />
-            } />
-            <Route path="/usuarios/gerenciar" element={
-              isAuth && isAdmin
-                ? <GerenciarUsuarios />
-                : <Navigate to="/login" replace />
-            } />
-            <Route path="/usuarios/cadastrar" element={
-              isAuth && isAdmin
-                ? <Cadastro />
-                : <Navigate to="/login" replace />
-            } />
-            <Route path="/usuarios/editar/:id" element={ 
-              isAuth && isAdmin
-                ? <EditarUsuario />
-                : <Navigate to="/login" replace />
-            } />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/" element={
+                isAuth
+                  ? <ProtectedRoute><Chamados /></ProtectedRoute>
+                  : <Navigate to="/login" replace />
+              } />
+              <Route path="/chamados/criar" element={
+                isAuth
+                  ? <ProtectedRoute><CriarChamado /></ProtectedRoute>
+                  : <Navigate to="/login" replace />
+              } />
+              <Route path="/usuarios/gerenciar" element={
+                isAuth && isAdmin
+                  ? <GerenciarUsuarios />
+                  : <Navigate to="/login" replace />
+              } />
+              <Route path="/usuarios/cadastrar" element={
+                isAuth && isAdmin
+                  ? <Cadastro />
+                  : <Navigate to="/login" replace />
+              } />
+              <Route path="/usuarios/editar/:id" element={ 
+                isAuth && isAdmin
+                  ? <EditarUsuario />
+                  : <Navigate to="/login" replace />
+              } />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <ToastContainer position="top-right" autoClose={3000} />
+          </>
         </main>
       </div>
     </div>

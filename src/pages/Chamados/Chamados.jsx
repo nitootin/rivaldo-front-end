@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { listarChamados, concluirChamado } from '../../service/Chamado';
+import { listarChamados, concluirChamado, cancelarChamado } from '../../service/Chamado';
 import { Link } from 'react-router-dom';
 import './Chamados.css';
+import BotaoAcao from '../../components/BotaoAcao';
+import BotaoCancelar from '../../components/BotaoCancelar';
+import { toast } from 'react-toastify';
 
 export default function Chamados() {
   const [chamados, setChamados] = useState([]);
@@ -16,16 +19,24 @@ export default function Chamados() {
         console.error('Erro ao buscar chamados:', error);
       }
     }
-
     fetchChamados();
   }, []);
 
-  const handleConcluir = async (id) => {
+  const onAcaoClick = async (chamadoId) => {
     try {
-      await concluirChamado(id);
-      window.location.reload(); 
+      await concluirChamado(chamadoId);
+      window.location.reload();
     } catch (error) {
-      console.error('Erro ao concluir chamado:', error);
+      console.error('Erro ao atualizar chamado:', error);
+    }
+  };
+
+  const onCancelarClick = async (chamadoId) => {
+    try {
+      await cancelarChamado(chamadoId);
+      window.location.reload();
+    } catch (error) {
+      console.error('Erro ao cancelar chamado:', error);
     }
   };
 
@@ -38,29 +49,34 @@ export default function Chamados() {
         </Link>
       </div>
 
-   {chamados.map((chamado) => (
-  <div key={chamado.id} className="chamado-card">
-    <div className="chamado-info">
-      <p className="info-line">
-        <span className="info-label">Descrição:</span>
-        <span className="info-value">{chamado.descricao}</span>
-      </p>
-      <p className="info-line">
-        <span className="info-label">Categoria:</span>
-        <span className="info-value">{chamado.categoria}</span>
-      </p>
-      <p className="info-line">
-        <span className="info-label">Solicitante:</span>
-        <span className="info-value">{chamado.solicitante?.nome || chamado.solicitante || "Desconhecido"}</span>
-      </p>
-    </div>
-    {role === 'ADMINISTRADOR' && (
-      <button className="btn-concluir" onClick={() => handleConcluir(chamado.id)}>
-        Concluir
-      </button>
-    )}
-  </div>
-))}
+      {chamados.map((chamado) => (
+        <div key={chamado.id} className="chamado-card">
+          <div className="chamado-info">
+            <p className="info-line">
+              <span className="info-label">Descrição:</span>
+              <span className="info-value">{chamado.descricao}</span>
+            </p>
+            <p className="info-line">
+              <span className="info-label">Categoria:</span>
+              <span className="info-value">{chamado.categoria}</span>
+            </p>
+            <p className="info-line">
+              <span className="info-label">Solicitante:</span>
+              <span className="info-value">{chamado.solicitante?.nome || chamado.solicitante || "Desconhecido"}</span>
+            </p>
+            <p className="info-line">
+              <span className="info-label">Status:</span>
+              <span className="info-value">{chamado.status}</span>
+            </p>
+          </div>
+          {role === 'ADMINISTRADOR' && (
+            <div className="botao-container-vertical">
+              <BotaoAcao chamado={chamado} onAcaoClick={onAcaoClick} />
+              <BotaoCancelar chamado={chamado} onCancelarClick={onCancelarClick} />
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 }

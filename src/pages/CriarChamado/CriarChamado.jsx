@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { criarChamado } from '../../service/Chamado';
+import { toast } from 'react-toastify';
 
 export default function CriarChamado() {
   const [descricao, setDescricao] = useState('');
@@ -17,18 +18,18 @@ export default function CriarChamado() {
     }
 
     const novoChamado = {
-      descricao,
-      categoria,
-      solicitante: user 
+      descricao: descricao.trim(),
+      categoria: categoria.toUpperCase(),  
+      solicitante: { id: user.id }        
     };
 
     try {
       await criarChamado(novoChamado);
-      alert("Chamado criado com sucesso!");
+       toast.success("Chamado criado com sucesso!");
       navigate('/');
     } catch (error) {
       console.error("Erro ao criar chamado:", error);
-      alert("Erro ao criar chamado.");
+      toast.error("Erro ao criar chamado!");
     }
   };
 
@@ -66,11 +67,11 @@ export default function CriarChamado() {
           type="submit"
           style={{
             backgroundColor: '#2563eb',
-            color: '#fff',
-            padding: '10px 20px',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer'
+            color: 'white',
+            padding: '12px 20px',
+            borderRadius: '9px',
+            cursor: 'pointer',
+            border: 'none'
           }}
         >
           Criar Chamado

@@ -6,6 +6,7 @@ import {
   atualizarStatusUsuario
 } from '../../service/Usuario';
 import './EditarUsuario.css';
+import { toast } from 'react-toastify';
 
 export default function EditarUsuario() {
   const { id } = useParams();
@@ -35,7 +36,7 @@ export default function EditarUsuario() {
           });
         }
       } catch (error) {
-        console.error('Erro ao buscar usuário:', error);
+        toast.error("Erro ao encontrar usuário!");
       }
     }
     fetchUsuario();
@@ -52,11 +53,11 @@ export default function EditarUsuario() {
       const payload = { ...formData };
       if (payload.senha === '') delete payload.senha;
       await atualizarUsuario(payload);
-      alert('Usuário atualizado com sucesso!');
+     toast.success("Usuário atualizado com sucesso!");
       navigate('/usuarios/gerenciar');
     } catch (error) {
       console.error('Erro ao atualizar usuário:', error);
-      alert('Erro ao atualizar usuário');
+      toast.error("Error ao atualizar usuário!");
     }
   };
 
@@ -128,12 +129,7 @@ export default function EditarUsuario() {
         </button>
       </form>
 
-      <button
-        onClick={handleToggleStatus}
-        className={`btn-status ${formData.ativo ? 'desativar' : 'ativar'}`}
-      >
-        {formData.ativo ? 'Ativar/desativar' : 'Ativar/desativar'}
-      </button>
+      
 
     </div>
   );

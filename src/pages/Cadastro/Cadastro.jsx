@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Cadastro.css';
 import { useNavigate } from 'react-router-dom';
 import { cadastrarUsuario } from '../../service/Cadastro';
+import { toast } from 'react-toastify';
 
 export default function Cadastro() {
   const [formData, setFormData] = useState({
@@ -23,10 +24,10 @@ export default function Cadastro() {
     e.preventDefault();
     try {
       await cadastrarUsuario(formData);
-      alert('Usuário cadastrado com sucesso!');
+      toast.success("Usuário cadastrado com sucesso!");
       navigate('/usuarios/gerenciar');
     } catch (error) {
-      alert('Erro ao cadastrar usuário. Verifique os dados e tente novamente.');
+      toast.error("erro ao criar usuário!");
       console.error(error);
     }
   };
@@ -57,8 +58,16 @@ export default function Cadastro() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Senha:</label>
+        <div className="form-group senha-group">
+          <div className="senha-label-container">
+            <label className="senha-label">Senha:</label>
+            <div className="tooltip">
+              <span className="tooltip-icon">❓</span>
+              <span className="tooltip-text">
+                A senha deve ter pelo menos 8 caracteres e conter: letra maiúscula, minúscula, número e caractere especial.
+              </span>
+            </div>
+          </div>
           <input
             type="password"
             name="senha"
@@ -79,17 +88,7 @@ export default function Cadastro() {
           />
         </div>
 
-        <div className="form-group">
-          <label>Perfil:</label>
-          <select
-            name="perfil"
-            value={formData.perfil}
-            disabled
-            style={{ backgroundColor: '#e5e7eb', cursor: 'not-allowed' }}
-          >
-            <option value="USUARIO">USUÁRIO</option>
-          </select>
-        </div>
+       
 
         <button type="submit" className="btn-cadastrar">Cadastrar</button>
       </form>

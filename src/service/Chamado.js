@@ -37,3 +37,20 @@ export async function concluirChamado(id) {
 
   return await response.json();
 }
+
+
+export async function cancelarChamado(id) {
+  const response = await fetch('http://localhost:8080/api/chamado/cancelar/status', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id }) // <-- ESSENCIAL!
+  });
+
+  if (!response.ok) {
+    throw new Error(`Erro ao cancelar chamado: ${response.statusText}`);
+  }
+
+  return await response.json();
+}
