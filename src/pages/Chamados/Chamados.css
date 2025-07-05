@@ -11,6 +11,10 @@
   gap: 20px; 
 }
 
+.chamado-info {
+  padding: 10px 0; 
+}
+
 .chamado-info p {
   margin: 4px 0;
   text-align: left;              
@@ -23,13 +27,14 @@
 }
 
 .info-line {
-  margin: 4px 0;
+  margin-bottom: 10px;  
 }
 
 .info-label {
   display: inline-block;
-  min-width: 80px;    
+  min-width: 120px;     
   font-weight: bold;
+  margin-right: 20px;   
 }
 
 .botao-container-vertical {
@@ -39,7 +44,6 @@
   gap: 10px;              
 }
 
-
 .btn-acao,
 .btn-cancelar {
   color: white;
@@ -48,7 +52,6 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
 
 .btn-acao {
   background-color: green;

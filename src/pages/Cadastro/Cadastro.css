@@ -25,6 +25,7 @@ form {
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
+  text-align: left;
 }
 
 .form-group input,
@@ -53,11 +54,17 @@ form {
   background-color: #1e40af;
 }
 
+
+.senha-label-container {
+  display: flex;          
+  align-items: center;    
+  gap: 6px;               
+}
+
 .tooltip {
   position: relative;
   display: inline-block;
   cursor: pointer;
-  margin-left: 8px;
 }
 
 .tooltip-icon {
